@@ -1,28 +1,36 @@
+![image](https://github.com/user-attachments/assets/6ac80be9-e503-4ee8-b8d9-3a4ecb0eb9a9)
+
+To win at ZED RUN you need the best horses, to get the best horses you need to breed smart. 
+This tool helps to SNIPE other people studs when they're put into the stud barn. 
+
 -----------------------
 ---- Stud Watcher -----
 -----------------------
 
-Stud Watcher is a Python script designed to monitor on-chain events related to Zed Run's NFT horse racing game; tracking when studs are placed into the stud barn for breeding, matcheing them against a local horse database, and sending notifications to specified Telegram chats.
+Stud Watcher is a Python script designed to monitor Zed Run on-chain events;
+- Tracks when studs are placed into the stud barn for breeding
+- Sends notifications to Telegram chats
 
-Please use responsibilitiy, being mindful not to steal all of the stud's covers. 
-
-
------------------------
----- Requirments ------
------------------------
-
-To run stud_watcher.py, you need the following:
-1. Python 3.8+
-2. Required Python packages: pandas, python-telegram-bot, web3.py
+(!) Please use responsibilitiy, being mindful not to steal all of the stud's covers. 
 
 
 -----------------------
 ------- Set-up --------
 -----------------------
 
-Database: Ensure you have a CSV file named horse_db.csv with the following columns: horse_id, name, genotype, bloodline, breed_type, stable_name. This contains all of the horses that you want to be notified about. 
+Ensure you have a CSV file named horse_db.csv. 
 
-API keys
+This database is essential; studs will only be triggered if on this database. 
+
+You can get data on horse universes from the hawku data dumps: https://zed-odds.netlify.app/
+
+Further analysis will be needed to refine the list to target the BEST studs - more on that in another post. 
+
+
+
+-----------------------
+------ API keys -------
+-----------------------
 
     Obtain an API key from Alchemy.
     Obtain a Telegram Bot API token by creating a bot on Telegram.
@@ -36,10 +44,20 @@ Update Configuration: Update the script to read these values from the environmen
 
 
 -----------------------
+----- VPS Stuff -------
+-----------------------
+
+Owners can put horses into stud whenever they like so this script needed to run 24/7, which means it needs to be run from a VPS. 
+
+To do this you'll need to learn a little about UNIX and SSH to set-up the scirpt and then some more when updating the horse_db.csv. 
+
+For an overview please see the UNIX_SSH_Stud_Watcher_GH PDF in the repo.
+
+-----------------------
 ----- How it works ----
 -----------------------
 
-HorseData Class - The HorseData class is responsible for;
+1. HorseData Class - The HorseData class is responsible for;
 
     Initializing a horse object with its ID and price.
     Matching the horse's ID with the data in the provided CSV database.
@@ -52,7 +70,7 @@ Methods;
     __str__(self): Returns a string representation of the horse's data.
 
 
-EventsWatch Class - The EventsWatch class is responsible for:
+2. EventsWatch Class - The EventsWatch class is responsible for:
     Configuring the connection to the Polygon blockchain.
     Fetching the latest horse-related transactions.
     Sending horse information to the specified Telegram chats.
@@ -73,7 +91,5 @@ The script runs the EventsWatch class in an asynchronous loop to constantly moni
 
 Upon running, the script will output the latest transactions and send formatted horse data to the configured Telegram chats if there's a match in the database.
 
-9 Buterin genesis
-Horse Kebalah, 0.0216
-Stable: 4theloveofcheesenwine
-Hawku: https://hawku.com/horse/42171
+<img width="470" alt="image" src="https://github.com/user-attachments/assets/206ca062-1dbf-4065-b66e-932dd9eb5458">
+
