@@ -5,7 +5,7 @@ from web3 import Web3
 from asyncio import run 
 
 class HorseData:
-    _db = pd.read_csv("horse_db")
+    _db = pd.read_csv("horse_db.csv")
     def __init__(self, id, price):
         self.id = int(id, 16)
         self.price = Web3.fromWei(int(price, 16), "ether")
